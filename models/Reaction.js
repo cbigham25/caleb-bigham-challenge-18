@@ -3,29 +3,24 @@ const { Schema, model } = require('mongoose');
 // Schema to create reaction model
 const reactionSchema = new Schema(
     {
-        //TODO Use Mongoose's ObjectId data type
-        // Default value is set to a new ObjectId 
         reactionId: {
-            type: ObjectId,
-            default: Date.now,
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId(),
         },
-        //TODO look up how to setup a getter method
-        createdAt: {
-            type: Date,
-            default: Date.now,
+        reactionBody: {
+            type: String,
+            required: true,
+            maxlength: 280,
         },
-
         username: {
             type: String,
             required: true,
         },
-        //TODO Look up how to do this, Array of nested documents created with the reactionSchema
-        reactions: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'reaction',
-            },
-        ],
+        createdAt: {
+            type: Date,
+            default: Date.now,
+            get: (date) => timeSince(date),
+        },
     },
     {
         // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
