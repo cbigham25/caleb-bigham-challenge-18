@@ -1,3 +1,6 @@
+//TODO // TODO change these to the thought apis from here: https://courses.bootcampspot.com/courses/3639/assignments/50942#submit:~:text=user%27s%20friend%20list-,/api/thoughts,-GET%20to%20get
+
+
 const router = require('express').Router();
 const {
   getVideos,
